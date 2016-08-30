@@ -1,4 +1,4 @@
-#!/system/bin/sh
+#!/bin/bash
 
 export TMPDIR=/tmp/
 mktempS() {
@@ -22,7 +22,7 @@ if [ -f "$2" ];then
 	scr="$(readlink -f "$2")"
 	used_scr=1
 else
-	scr="$PWD/changes.sh"
+	scr="$PWD/su/changes.sh"
 fi
 
 cleanup() {

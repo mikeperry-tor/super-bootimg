@@ -1,4 +1,4 @@
-#!/system/bin/sh
+#!/bin/bash
 
 #self = $scr
 
@@ -84,6 +84,12 @@ if [ -f "sepolicy" -a -z "$UNSUPPORTED_SELINUX" ];then
 	if [ "$selinuxmode" == "eng" ];then
 		"$scriptdir"/bin/sepolicy-inject"$SEPOLICY" -Z su -P sepolicy
 	fi
+fi
+
+if [ "$noverity" -eq 0 ]; then
+  cp "$scriptdir"/verity_key verity_key
+  addFile verity_key
+  chmod 0755 sbin/su
 fi
 
 #Check if user wants to edit fstab
