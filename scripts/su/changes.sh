@@ -49,6 +49,10 @@ if [ -f "sepolicy" -a -z "$UNSUPPORTED_SELINUX" ];then
 	"$scriptdir"/bin/sepolicy-inject"$SEPOLICY" -s su_daemon -f device -c dir -t su_device -P sepolicy
 	allow su_device tmpfs filesystem "associate"
 
+	# needed by CopperheadOS on N.. su context isn't properly inheriting
+	# access to tmpfs files...
+	allow su tmpfs file "read"
+
 	#Transition from untrusted_app to su_client
 	#TODO: other contexts want access to su?
 	allowSuClient shell
